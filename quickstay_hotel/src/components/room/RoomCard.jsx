@@ -1,0 +1,35 @@
+import React from 'react'
+import { Col, Card } from 'react-bootstrap'
+import { Link } from "react-router-dom"
+
+const RoomCard = ({room}) => {
+  return (
+    <Col key={room.id} className='mb-4' xs={12}>
+        <Card className="room-card">
+            <Card.Body className="room-card-body">
+                <div className="room-card-media">
+                    <Link to={`/book-room/${room.id}`} className='room-card-image-link'>
+                    <Card.Img
+                        variant='top'
+                        className="room-card-img"
+                        src={room.photo ? `data:image/png;base64,${room.photo}` : undefined}
+                        alt='Room Photo'/>
+                    </Link>    
+                </div>
+                <div className="flex-shrink-0">
+                    <Card.Title className='hotel-color'>{room.roomType}</Card.Title>
+                    <Card.Title className='room-price'>Rs{room.roomPrice} / Night</Card.Title>
+                    <Card.Text>Some room information goes here for the guest to read through </Card.Text>
+                </div>
+                <div className="room-card-action">
+                    <Link to={`/book-room/${room.id}`} className='btn btn-hotel btn-sm'>
+                        Book Now
+                    </Link>
+                </div>
+            </Card.Body>
+        </Card>
+    </Col>
+  )
+}
+
+export default RoomCard
