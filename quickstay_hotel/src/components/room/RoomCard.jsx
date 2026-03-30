@@ -1,8 +1,12 @@
 import React from 'react'
 import { Col, Card } from 'react-bootstrap'
 import { Link } from "react-router-dom"
+import { buildRoomImageSrc } from '../utils/imageUtils.js'
+import fallbackRoomImage from '../../assets/images/images.jpg'
 
 const RoomCard = ({room}) => {
+  const imageSrc = buildRoomImageSrc(room) || fallbackRoomImage
+
   return (
     <Col key={room.id} className='mb-4' xs={12}>
         <Card className="room-card">
@@ -12,7 +16,7 @@ const RoomCard = ({room}) => {
                     <Card.Img
                         variant='top'
                         className="room-card-img"
-                        src={room.photo ? `data:image/png;base64,${room.photo}` : undefined}
+                        src={imageSrc || undefined}
                         alt='Room Photo'/>
                     </Link>    
                 </div>

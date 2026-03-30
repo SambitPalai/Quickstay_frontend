@@ -2,15 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getRoomById, updateRoom } from '../utils/ApiFunctions.js'
 import RoomTypeSelector from '../common/RoomTypeSelector.jsx'
-
-const buildPreviewSrc = (photo) => {
-    if (!photo) return ""
-    if (typeof photo !== "string") return ""
-    if (photo.startsWith("data:") || photo.startsWith("http") || photo.startsWith("blob:")) {
-        return photo
-    }
-    return `data:image/jpeg;base64,${photo}`
-}
+import { buildImageSrc } from '../utils/imageUtils.js'
 
 const EditRoom = () => {
    const[room, setRoom] = useState ({
@@ -32,7 +24,7 @@ const EditRoom = () => {
             roomType: roomData?.roomType ?? "",
             roomPrice: roomData?.roomPrice ?? ""
         })
-        setImagePreview(buildPreviewSrc(roomData?.photo))
+        setImagePreview(buildImageSrc(roomData?.photo))
       }
 
       const handleImageChange = (e) => {

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const api = axios.create({
-    baseURL :"http://localhost:9192"
+    baseURL: import.meta.env.VITE_API_BASE_URL
 })
 
 const getApiErrorMessage = (error, fallbackMessage) => {
@@ -108,7 +108,7 @@ export async function getRoomTypes() {
         return response.data
     }
     catch(error){
-        throw new Error("Error fetching room types")   
+        throw new Error(getApiErrorMessage(error, "Error fetching room types"))   
     }
 
 }
@@ -120,7 +120,7 @@ export async function getAllRooms() {
         return result.data
     }
     catch(error){
-        throw new Error("Error fetching rooms")
+        throw new Error(getApiErrorMessage(error, "Error fetching rooms"))
     }
 }
 
