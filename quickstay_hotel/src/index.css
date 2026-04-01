@@ -460,6 +460,16 @@ a:hover {
   text-align: right;
 }
 
+.complaint-message{
+  max-width: 320px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.complaint-status-select{
+  min-width: 140px;
+}
+
 @media only screen and (max-width: 576px) {
   .summary-list li{
     flex-direction: column;
