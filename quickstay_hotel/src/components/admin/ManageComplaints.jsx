@@ -1,9 +1,15 @@
 import { useEffect, useMemo, useState } from "react"
 import moment from "moment"
 import Header from "../common/Header"
-import { getAllComplaints, updateComplaintStatus } from "../utils/ApiFunctions"
+import { getAllComplaints, updateComplaintStatus, getComplaintsByStatus } from "../utils/ApiFunctions"
 import { FaRegCommentDots } from "react-icons/fa"
 
+const statusOptions = [
+    { value: "ALL", label: "All" },
+    { value: "OPEN", label: "Open" },
+    { value: "IN_PROGRESS", label: "In Progress" },
+    { value: "RESOLVED", label: "Resolved" }
+]
 const normalizeStatus = (status) => {
     const value = (status || "OPEN").toString().trim().toUpperCase()
     if (value === "IN PROGRESS" || value === "INPROGRESS") {
@@ -71,15 +77,19 @@ const ManageComplaints = () => {
     const [successMessage, setSuccessMessage] = useState("")
     const [searchQuery, setSearchQuery] = useState("")
     const [updatingId, setUpdatingId] = useState(null)
+    const [statusFilter, setStatusFilter] = useState("ALL")
 
+    
     useEffect(() => {
-        fetchComplaints()
-    }, [])
+        fetchComplaints(statusFilter)
+    }, [statusFilter])
 
-    const fetchComplaints = async () => {
+    const fetchComplaints = async (status) => {
         setIsLoading(true)
         try {
-            const data = await getAllComplaints()
+            const data = status && status !== "ALL"
+                ? await getComplaintsByStatus(status)
+                : await getAllComplaints()
             setComplaints(Array.isArray(data) ? data : [])
         } catch (error) {
             setErrorMessage(error.message || "Could not load complaints.")
@@ -101,7 +111,7 @@ const ManageComplaints = () => {
         try {
             await updateComplaintStatus(complaintId, status)
             setSuccessMessage(`Complaint ${complaintId} marked as ${status}.`)
-            fetchComplaints()
+            fetchComplaints(statusFilter)
         } catch (error) {
             setErrorMessage(error.message || "Failed to update complaint.")
         } finally {
@@ -149,14 +159,33 @@ const ManageComplaints = () => {
                         Track, prioritize, and resolve guest issues.
                     </p>
                 </div>
-                <div className="w-100 w-md-auto" style={{ maxWidth: "360px" }}>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search by room, guest, message..."
-                        value={searchQuery}
-                        onChange={(event) => setSearchQuery(event.target.value)}
-                    />
+                 <div className="d-flex flex-column flex-sm-row gap-2 align-items-stretch w-100 w-md-auto">
+                    <div className="d-flex flex-wrap gap-2">
+                        {statusOptions.map((option) => (
+                            <button
+                                key={option.value}
+                                type="button"
+                                className={`btn btn-sm ${
+                                    statusFilter === option.value
+                                        ? "btn-hotel"
+                                        : "btn-outline-secondary"
+                                }`}
+                                onClick={() => setStatusFilter(option.value)}
+                                aria-pressed={statusFilter === option.value}
+                            >
+                                {option.label}
+                            </button>
+                        ))}
+                    </div>
+                    <div style={{ maxWidth: "360px", width: "100%" }}>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search by room, guest, message..."
+                            value={searchQuery}
+                            onChange={(event) => setSearchQuery(event.target.value)}
+                        />
+                    </div>
                 </div>
             </div>
 
