@@ -103,6 +103,15 @@ const NavBar = () => {
                                 Find my booking
                             </NavLink>
                         </li>
+                        {isLoggedIn() && (
+                            <li className="nav-item">
+                                <NavLink
+                                    className="nav-link"
+                                    to={isAdmin() || isOwner() ? "/admin/complaints" : "/complaints"}>
+                                    Complaints
+                                </NavLink>
+                            </li>
+                        )}
 
                         <li
                             className="nav-item dropdown"
