@@ -16,7 +16,9 @@ import Unauthorized from "./components/common/Unauthorized.jsx"
 import { AuthProvider } from "./components/auth/AuthContext.jsx"
 import ProtectedRoute from "./components/auth/ProtectedRoute.jsx"
 import ManageBookings  from "./components/admin/ManageBookings.jsx"
+import ManageComplaints from "./components/admin/ManageComplaints.jsx"
 import UserProfile     from "./components/user/UserProfile.jsx"
+import UserComplaints  from "./components/user/UserComplaints.jsx"
 import FindBooking     from "./components/booking/FindBooking.jsx"
 import OwnerDashboard  from "./components/owner/OwnerDashboard.jsx"
 import ManageAdmins    from "./components/owner/ManageAdmins.jsx"
@@ -59,6 +61,11 @@ function App() {
                   <UserProfile />
                 </ProtectedRoute>
               }/>
+              <Route path="/complaints" element={
+                <ProtectedRoute>
+                  <UserComplaints />
+                </ProtectedRoute>
+              }/>
 
               {/* ----- Admin only routes ----------------------- */}
               <Route path="/admin" element={
@@ -69,6 +76,11 @@ function App() {
                <Route path="/admin/bookings" element={
                 <ProtectedRoute adminOnly>
                   <ManageBookings />
+                </ProtectedRoute>
+              }/>
+              <Route path="/admin/complaints" element={
+                <ProtectedRoute adminOnly>
+                  <ManageComplaints />
                 </ProtectedRoute>
               }/>
               <Route path="/existing-rooms" element={
