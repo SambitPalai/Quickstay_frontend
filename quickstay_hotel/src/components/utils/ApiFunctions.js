@@ -270,7 +270,7 @@ export async function getUserBookingsByEmail(email) {
 /* This function submits a new complaint */
 export async function createComplaint(complaintData) {
     try {
-        const response = await api.post("/complaints", complaintData)
+        const response = await api.post("/complaints/raise", complaintData)
         return response.data
     } catch (error) {
         throw new Error(getApiErrorMessage(error, "Failed to submit complaint"))
@@ -280,7 +280,7 @@ export async function createComplaint(complaintData) {
 /* This function gets complaints for the logged-in user */
 export async function getMyComplaints() {
     try {
-        const response = await api.get("/complaints/my")
+        const response = await api.get("/complaints/my-complaints")
         return response.data
     } catch (error) {
         throw new Error(getApiErrorMessage(error, "Failed to load complaints"))
@@ -290,7 +290,19 @@ export async function getMyComplaints() {
 /* This function gets all complaints (admin/owner only) */
 export async function getAllComplaints() {
     try {
-        const response = await api.get("/complaints")
+        const response = await api.get("/complaints/all")
+        return response.data
+    } catch (error) {
+        throw new Error(getApiErrorMessage(error, "Failed to load complaints"))
+    }
+}
+
+/* This function gets complaints filtered by status */
+export async function getComplaintsByStatus(status) {
+    try {
+        const response = await api.get("/complaints/filter", {
+            params: { status }
+        })
         return response.data
     } catch (error) {
         throw new Error(getApiErrorMessage(error, "Failed to load complaints"))
