@@ -63,6 +63,27 @@ const Admin = () => {
                     </div>
                 </div>
 
+                {/*  ------------- Complaint Management Card  ----------------- */}
+                <div className="col-12 col-md-6">
+                    <div className="card h-100 shadow-sm">
+                        <div className="card-body">
+                            <h5 className="card-title hotel-color">
+                                <FaRegCommentDots className="me-2" />
+                                Complaint Dashboard
+                            </h5>
+                            <p className="card-text text-muted">
+                                Track and resolve guest complaints.
+                            </p>
+                            <div className="d-flex flex-column gap-2 mt-3">
+                                <Link to="/admin/complaints" className="btn btn-hotel">
+                                    <FaList className="me-2" />
+                                    View All Complaints
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </section>
     )
