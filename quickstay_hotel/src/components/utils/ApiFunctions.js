@@ -264,3 +264,45 @@ export async function getUserBookingsByEmail(email) {
         throw new Error(`Error fetching bookings: ${error.message}`)
     }
 }
+
+// ----- Complaint Functions -------------------
+
+/* This function submits a new complaint */
+export async function createComplaint(complaintData) {
+    try {
+        const response = await api.post("/complaints", complaintData)
+        return response.data
+    } catch (error) {
+        throw new Error(getApiErrorMessage(error, "Failed to submit complaint"))
+    }
+}
+
+/* This function gets complaints for the logged-in user */
+export async function getMyComplaints() {
+    try {
+        const response = await api.get("/complaints/my")
+        return response.data
+    } catch (error) {
+        throw new Error(getApiErrorMessage(error, "Failed to load complaints"))
+    }
+}
+
+/* This function gets all complaints (admin/owner only) */
+export async function getAllComplaints() {
+    try {
+        const response = await api.get("/complaints")
+        return response.data
+    } catch (error) {
+        throw new Error(getApiErrorMessage(error, "Failed to load complaints"))
+    }
+}
+
+/* This function updates complaint status */
+export async function updateComplaintStatus(complaintId, status) {
+    try {
+        const response = await api.patch(`/complaints/${complaintId}/status`, { status })
+        return response.data
+    } catch (error) {
+        throw new Error(getApiErrorMessage(error, "Failed to update complaint"))
+    }
+}
