@@ -93,6 +93,7 @@ const UserProfile = () => {
                             <tr>
                                 <th>Confirmation Code</th>
                                 <th>Room Type</th>
+                                <th>Room No.</th>
                                 <th>Check-In</th>
                                 <th>Check-Out</th>
                                 <th>Adults</th>
@@ -117,6 +118,7 @@ const UserProfile = () => {
                                     <tr key={booking.bookingId}>
                                         <td>{booking.bookingConfirmationCode}</td>
                                         <td>{booking.room?.roomType}</td>
+                                        <td>{booking.room?.roomNo || booking.roomNo || booking.room?.roomNumber || "-"}</td>
                                         <td>{moment(booking.checkInDate, "YYYY-MM-DD", true).format("DD MMM YYYY")}</td>
                                         <td>{moment(booking.checkOutDate, "YYYY-MM-DD", true).format("DD MMM YYYY")}</td>
                                         <td>{booking.numOfAdults}</td>
