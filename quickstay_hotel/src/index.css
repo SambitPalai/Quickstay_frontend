@@ -147,7 +147,8 @@ a:hover {
     color: var(--color-primary);
   }
   .room-price{
-    color: var(--color-accent);
+    color: var(--color-primary-strong);
+);
     font-family: 'Courier New', Courier, monospace;
     font-size:medium;
   }
