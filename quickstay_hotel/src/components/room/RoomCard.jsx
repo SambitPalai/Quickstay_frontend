@@ -22,8 +22,7 @@ const RoomCard = ({room}) => {
                 </div>
                 <div className="flex-shrink-0">
                     <Card.Title className='hotel-color'>{room.roomType}</Card.Title>
-                    <Card.Title className='room-price'>Rs{room.roomPrice} / Night</Card.Title>
-                    <Card.Text>Some room information goes here for the guest to read through </Card.Text>
+                    <Card.Title className='room-price'>Rs {room.roomPrice} / Night</Card.Title>
                 </div>
                 <div className="room-card-action">
                     <Link to={`/book-room/${room.id}`} className='btn btn-hotel btn-sm'>
