@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../auth/AuthContext"
-import { FaHotel, FaCalendarCheck, FaPlus, FaList } from "react-icons/fa"
+import { FaHotel, FaCalendarCheck, FaPlus, FaList, FaRegCommentDots } from "react-icons/fa"
 
 const Admin = () => {
     const { user } = useAuth()
