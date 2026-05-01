@@ -508,6 +508,9 @@ a:hover {
 .dropdown-menu {
   background-color: var(--color-surface);
   border-color: var(--color-border);
+  max-width: 200px;
+  overflow-y: auto;
+  max-height: 80vh;
 }
 
 .dropdown-item {
